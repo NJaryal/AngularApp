@@ -1,0 +1,27 @@
+<div class="page-header text-center">
+    <h1>BBC News</h1>
+</div>
+<form class="form-inline row formFilter">
+    <div class="form-group col-md-4">
+        <label for="source">Source:</label>
+        <select class="form-control" id="source" (change)="filterForeCasts($event.target.value)">
+                    <option value="0">bbc-news</option>
+                    <option *ngFor="let source of sources" value={{source}}>
+                        {{summary}}
+                    </option>
+            </select>
+    </div>
+    <div class="form-group col-md-4">
+        <input #searchInput type="text" [(ngModel)]="searchText" class="form-control" placeholder="Type your text">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" (click)="onClick(searchInput.value)">Filter</button>
+        </div>
+    </div>
+
+    <div class="checkbox col-md-2">
+        <label><input type="checkbox"> Only created by me</label>
+    </div>
+    <a class="btn btn-primary active col-md-2" routerLink="news/create" role="button" routerLink="news">Add Article</a>
+
+</form>
+<app-news-list></app-news-list>
