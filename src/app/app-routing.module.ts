@@ -11,14 +11,14 @@ import { NewsFilterComponent } from './news/news-toolbar/news-filter/news-filter
 const routes: Routes = [
   /* {
     path: '404',
-    component: 404Component,
+    component: P404Component,
     data: {
       title: 'Page 404'
     }
   },
   {
     path: '500',
-    component: 500Component,
+    component: P500Component,
     data: {
       title: 'Page 500'
     }
@@ -27,16 +27,16 @@ const routes: Routes = [
     path: '',
     component: LayoutComponent,
   },
-  {
-    path: 'news',
-    component: NewsEditComponent,
-    children: [
-      {
-        path: 'edit',
-        component: NewsEditComponent
-      }
-    ]
-  }
+   {
+     path: 'news',
+     component: NewsEditComponent,
+     children: [
+       {
+         path: 'edit',
+         component: NewsEditComponent
+       }
+     ]
+   }
 ];
 
 @NgModule({
