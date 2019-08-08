@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { News , Articles} from '../news';
 import { NewsService } from '../news.service';
 
@@ -10,22 +10,16 @@ import { NewsService } from '../news.service';
 export class NewsListComponent implements OnInit {
   articles: News;
   filterArticles: Articles[];
+  searchText: any;
+  @Input() searchTerm: string;
+  @Input('data')
+  set data(data: any) {
+    this.searchText = data;
+  }
 
   constructor(private newsApi: NewsService) {}
 
   ngOnInit() {
     this.newsApi.getNews().subscribe((resp) => this.articles = resp);
-  }
-
-  onClicked(value: string) {
-    if (value! = '') {
-    this.filterArticles = this.articles.articles.filter(res => res.author.startsWith(value));
-    } else {
-      this.newsApi.getNews().subscribe(
-          (data) => {
-            this.articles = data;
-          }
-        );
-    }
   }
 }

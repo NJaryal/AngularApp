@@ -14,14 +14,14 @@
     <div class="form-group col-md-4">
         <input #searchInput type="text" [(ngModel)]="searchText" name="searchText" class="form-control" placeholder="Type your text">
         <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button" (click)="onClick(searchInput.value)">Filter</button>
+            <button class="btn btn-outline-secondary" type="button" (click)="discoverClicked()">Filter</button>
         </div>
     </div>
 
     <div class="checkbox col-md-2">
         <label><input type="checkbox"> Only created by me</label>
     </div>
-    <a class="btn btn-primary active col-md-2" routerLink="news/create" role="button">Add Article</a>
+    <a class="btn btn-primary active col-md-2" role="button" (click)="onLoadNews()">Add Article</a>
 
 </form>
-<app-news-list></app-news-list>
+<app-news-list [data]=data></app-news-list>
