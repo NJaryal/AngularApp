@@ -1,13 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { fakeBackendProvider } from './_helpers'; // create fake backend
 import { FilterPipe } from './../utilities/pipes';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './common/header/header.component';
+import { FooterComponent } from './common/footer/footer.component';
 import { NewsListComponent } from './news/news-list/news-list.component';
 import { NewsEditComponent } from './news/news-edit/news-edit.component';
 import { NewsToolbarComponent } from './news/news-toolbar/news-toolbar.component';
@@ -15,6 +16,12 @@ import { NewsFilterComponent } from './news/news-toolbar/news-filter/news-filter
 import { NewsComponent } from './news/news.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { NewsCreateComponent } from './news/news-create/news-create.component';
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './auth/_guards';
+import { JwtInterceptor, ErrorInterceptor } from './_helpers';
+import { AlertService, AuthService, UserService } from './auth/_services';
+import { AlertComponent } from './common/_directives';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +35,10 @@ import { NewsCreateComponent } from './news/news-create/news-create.component';
     NewsComponent,
     ErrorPageComponent,
     FilterPipe,
-    NewsCreateComponent
+    NewsCreateComponent,
+    LoginComponent,
+    AlertComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +47,15 @@ import { NewsCreateComponent } from './news/news-create/news-create.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    AuthGuard,
+    AlertService,
+    AuthService,
+    UserService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    fakeBackendProvider
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
