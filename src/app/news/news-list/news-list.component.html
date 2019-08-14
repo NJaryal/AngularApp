@@ -1,0 +1,10 @@
+<ul class="list-group">
+    <li *ngFor="let article of articles.articles | filter: {author: searchText,title: searchText,description: searchText }">
+        <img src="{{article.urlToImage}}">
+        <div>
+            <h4>AUTHOR: {{article.author}}</h4>
+            <strong>{{article.title}} </strong>
+            <p>Description: {{article.description}}</p>
+        </div>
+    </li>
+</ul>

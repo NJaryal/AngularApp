@@ -1,0 +1,72 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Create News</strong>
+                </div>
+                <form [formGroup]="createNewsForm" (ngSubmit)="onSubmit()">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label class="col-form-label" for="textarea-input">News Heading</label>
+                                <input type="text" class="form-control" placeholder="Type Heading" autocomplete="Heading" formControlName="Heading" [ngClass]="{'is-invalid':createNewsForm.get('Heading').touched && createNewsForm.get('Heading').invalid}">
+                                <div *ngIf="createNewsForm.get('Heading').touched && createNewsForm.get('Heading').invalid" class="invalid-feedback">
+                                    <div *ngIf="createNewsForm.get('Heading').errors.required">News Heading is required</div>
+                                    <div *ngIf="createNewsForm.get('Heading').errors.minlength">News Heading must be at least 6 characters</div>
+                                    <div *ngIf="createNewsForm.get('Heading').errors.maxlength">News Heading max length should be 20 characters</div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="col-form-label" for="messageDuration">Date</label>
+                                <input type="text" class="form-control" placeholder="Date DD/MM/YY" autocomplete="Date" formControlName="Date" [ngClass]="{'is-invalid':createNewsForm.get('Date').touched && createNewsForm.get('Date').invalid}">
+                                <div *ngIf="createNewsForm.get('Date').errors" class="invalid-feedback">
+                                    <div *ngIf="createNewsForm.get('Date').errors.required">Date is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="col-form-label" for="textarea-input">Short Description</label>
+                                <textarea placeholder="Description" formControlName="shortDescription" class="form-control" [ngClass]="{'is-invalid': createNewsForm.get('shortDescription').errors  && (createNewsForm.get('shortDescription').touched || createNewsForm.get('shortDescription').dirty)}"></textarea>
+                                <div *ngIf="createNewsForm.get('shortDescription').touched && createNewsForm.get('shortDescription').invalid" class="invalid-feedback">
+                                    <div *ngIf="createNewsForm.get('shortDescription').errors.required">Description is required</div>
+                                    <div *ngIf="createNewsForm.get('shortDescription').errors.minlength">Description must be at least 6 characters</div>
+                                    <div *ngIf="createNewsForm.get('shortDescription').errors.maxlength">Description max length should be 36 characters</div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="col-form-label" for="messageDuration">Author</label>
+                                <input type="text" class="form-control" placeholder="Author" autocomplete="new-sourceUrl" formControlName="Author" [ngClass]="{'is-invalid': createNewsForm.get('Author').errors  && (createNewsForm.get('Author').touched || createNewsForm.get('Author').dirty)}">
+                                <div *ngIf="createNewsForm.get('Author').touched && createNewsForm.get('Author').invalid" class="invalid-feedback">
+                                    <div *ngIf="createNewsForm.get('Author').errors.required">Author is required</div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label class="col-form-label" for="textarea-input">Content</label>
+                                <textarea placeholder="Content" formControlName="Content" class="form-control" [ngClass]="{'is-invalid': createNewsForm.get('Content').errors  && (createNewsForm.get('Content').touched || createNewsForm.get('Content').dirty)}"></textarea>
+                                <div *ngIf="createNewsForm.get('Content').touched && createNewsForm.get('Content').invalid" class="invalid-feedback">
+                                    <div *ngIf="createNewsForm.get('Content').errors.required">Content is required</div>
+                                    <div *ngIf="createNewsForm.get('Content').errors.minlength">Content must be at least 6 characters</div>
+                                    <div *ngIf="createNewsForm.get('Content').errors.maxlength">Content max length should be 36 characters</div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group col-md-6">
+                                <label class="col-form-label" for="messageDuration">Source Url</label>
+                                <input type="sourceUrl" class="form-control" placeholder="sourceUrl" autocomplete="new-sourceUrl" formControlName="sourceUrl" [ngClass]="{'is-invalid': createNewsForm.get('sourceUrl').errors  && (createNewsForm.get('sourceUrl').touched || createNewsForm.get('sourceUrl').dirty)}">
+                                <div *ngIf="createNewsForm.get('sourceUrl').errors" class="invalid-feedback">
+                                    <div *ngIf="createNewsForm.get('sourceUrl').errors.required">sourceUrl required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-sm btn-success" type="submit"><i class="fa fa-dot-circle-o"></i> Create News</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
