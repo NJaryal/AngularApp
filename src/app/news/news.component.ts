@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { User } from '../auth/_models';
 import { UserService } from '../auth/_services';
-
+import { NewsserverService } from '../shared/newsserver.service'; 
 
 @Component({
   selector: 'app-news',
@@ -13,7 +13,7 @@ export class NewsComponent implements OnInit {
   currentUser: User;
     users: User[] = [];
 
-  constructor(private userService: UserService) { 
+  constructor(private userService: UserService, private newsService: NewsserverService) { 
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 
