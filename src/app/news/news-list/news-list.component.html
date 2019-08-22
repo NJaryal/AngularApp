@@ -1,10 +1,23 @@
-<ul class="list-group">
-    <li *ngFor="let article of articles.articles | filter: {author: searchText,title: searchText,description: searchText }">
-        <img src="{{article.urlToImage}}">
+<ul class="list-group" *ngIf="articles">
+    <li *ngFor="
+      let article of articles.articles
+        | filter
+          : { author: searchText, title: searchText, description: searchText };
+      let i = index
+    ">
+        <img src="{{ article.urlToImage }}" />
         <div>
-            <h4>AUTHOR: {{article.author}}</h4>
-            <strong>{{article.title}} </strong>
-            <p>Description: {{article.description}}</p>
+            <h4>AUTHOR: {{ article.author }}</h4>
+            <strong>{{ article.title }} </strong>
+            <p>Description: {{ article.description }}</p>
+        </div>
+        <div class="btn-group-vertical pull-right" role="group" *ngIf="localNews">
+            <button type="button" class="btn btn-primary btn-sm mb-1" (click)="editNews(i)">
+        Edit
+      </button>
+            <button type="button" class="btn btn-secondary btn-sm" (click)="delteNews(i)">
+        Delete
+      </button>
         </div>
     </li>
 </ul>

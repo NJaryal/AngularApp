@@ -10,7 +10,6 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './common/header/header.component';
 import { FooterComponent } from './common/footer/footer.component';
 import { NewsListComponent } from './news/news-list/news-list.component';
-import { NewsEditComponent } from './news/news-edit/news-edit.component';
 import { NewsToolbarComponent } from './news/news-toolbar/news-toolbar.component';
 import { NewsFilterComponent } from './news/news-toolbar/news-filter/news-filter.component';
 import { NewsComponent } from './news/news.component';
@@ -30,7 +29,6 @@ import { NewsserverService } from './shared/newsserver.service';
     HeaderComponent,
     FooterComponent,
     NewsListComponent,
-    NewsEditComponent,
     NewsToolbarComponent,
     NewsFilterComponent,
     NewsComponent,
