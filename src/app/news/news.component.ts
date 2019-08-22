@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { User } from '../auth/_models';
 import { UserService } from '../auth/_services';
-import { NewsserverService } from '../shared/newsserver.service';
 
 @Component({
   selector: 'app-news',
@@ -19,7 +18,7 @@ export class NewsComponent implements OnInit {
     this.searchText = data;
   }
 
-  constructor(private userService: UserService, private newsService: NewsserverService) {
+  constructor(private userService: UserService) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 

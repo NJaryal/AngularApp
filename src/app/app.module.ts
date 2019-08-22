@@ -21,7 +21,6 @@ import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { AlertService, AuthService, UserService } from './auth/_services';
 import { AlertComponent } from './common/_directives';
 import { RegisterComponent } from './register/register.component';
-import { NewsserverService } from './shared/newsserver.service';
 
 @NgModule({
   declarations: [
@@ -53,8 +52,7 @@ import { NewsserverService } from './shared/newsserver.service';
     UserService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    fakeBackendProvider,
-    NewsserverService
+    fakeBackendProvider
   ],
   bootstrap: [AppComponent]
 })

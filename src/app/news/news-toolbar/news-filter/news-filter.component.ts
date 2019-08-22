@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 
 import { News, Articles } from '../../news';
 import { NewsService } from '../../news.service';
-import { NewsserverService } from '../../../shared/newsserver.service';
 
 @Component({
   selector: 'app-news-filter',
@@ -24,7 +23,7 @@ export class NewsFilterComponent implements OnInit {
     this.data = this.searchText;
   }
 
-  constructor(private router: Router, private newsApi: NewsService, private newsService: NewsserverService) { }
+  constructor(private router: Router, private newsApi: NewsService) { }
 
   ngOnInit() {
     this.selectedNewsItem = this.newsApi.selectedNewsType;
