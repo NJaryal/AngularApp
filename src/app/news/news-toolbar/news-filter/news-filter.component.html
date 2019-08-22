@@ -4,7 +4,7 @@
 <form class="form-inline row formFilter">
     <div class="form-group col-md-4">
         <label for="source">Source:</label>
-        <select class="form-control" id="source" (change)="onNewsSelection($event.target.value)">
+        <select name="selectedNewsItem" class="form-control" id="source" [(ngModel)]="selectedNewsItem" (change)="onNewsSelection($event.target.value)">
       <option *ngFor="let source of newsSource" value="{{ source }}">
         {{ source }}
       </option>

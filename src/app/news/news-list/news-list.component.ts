@@ -33,4 +33,11 @@ export class NewsListComponent implements OnInit {
   editNews(index) {
     this.router.navigate(['/news/edit/' + index]);
   }
+
+  delteNews(newsItem: any) {
+    this.newsApi.deleteNewsItem(newsItem).subscribe((res) => {
+      this.newsApi.getLocalNews();
+      alert('news item deleted');
+    });
+  }
 }

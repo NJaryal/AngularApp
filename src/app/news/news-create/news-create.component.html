@@ -5,7 +5,7 @@
                 <div class="card-header">
                     <strong>Create News</strong>
                 </div>
-                <form [formGroup]="createNewsForm" (ngSubmit)="onSubmit()">
+                <form [formGroup]="createNewsForm">
                     <div class="card-body">
                         <div class="row">
                             <div class="form-group col-md-6">
@@ -211,8 +211,12 @@
             </div>
           </div>
           <div class="card-footer">
-            <button class="btn btn-sm btn-success" type="submit">
-              <i class="fa fa-dot-circle-o"></i> Create News
+            <button
+              class="btn btn-sm btn-success"
+              type="submit"
+              (click)="saveItem()"
+            >
+              <i class="fa fa-dot-circle-o"></i> Save
             </button>
           </div>
         </form>

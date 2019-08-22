@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NewsService } from '../news.service';
 
 @Component({
@@ -11,13 +11,14 @@ import { NewsService } from '../news.service';
 export class NewsCreateComponent implements OnInit {
   createNewsForm: FormGroup;
   submitted = false;
-  selectedNewsItem;
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private newsAPIService: NewsService) { }
+  selectedNewsItem: any;
+  constructor(private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private newsAPIService: NewsService, private router: Router) { }
 
   ngOnInit() {
     const index = parseInt(this.route.snapshot.params.index);
-    this.selectedNewsItem = this.newsAPIService.newsArticles.articles[index];
-    console.log(this.selectedNewsItem);
+    this.selectedNewsItem = this.newsAPIService.newsArticles['articles'][index];
     this.createNewsForm = this.formBuilder.group({
       title: [this.selectedNewsItem ?
         this.selectedNewsItem.title : '',
@@ -43,9 +44,19 @@ export class NewsCreateComponent implements OnInit {
       [Validators.required]],
     });
   }
-  onSubmit() {
-    this.submitted = true;
-    console.log(this.createNewsForm.value);
+
+  saveItem() {
+    if (this.selectedNewsItem) {
+      this.createNewsForm.value._id = this.selectedNewsItem._id;
+      this.newsAPIService.updateNewsItem(this.createNewsForm.value).subscribe((res) => {
+        this.router.navigate(['/news']);
+        console.log(res);
+      });
+    } else {
+      this.newsAPIService.addNewsItem(this.createNewsForm.value).subscribe((res) => {
+        this.router.navigate(['/news']);
+      });
+    }
   }
 
 }

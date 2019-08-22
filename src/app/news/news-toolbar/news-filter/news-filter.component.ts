@@ -17,8 +17,9 @@ export class NewsFilterComponent implements OnInit {
   @Output() clicked = new EventEmitter<string>();
   private searchText: any;
   private data: any;
-  newsSource = ['Worlwide News', 'Local News'];
+  newsSource = ['Worldwide News', 'Local News'];
   localNews: boolean;
+  selectedNewsItem: string;
   discoverClicked() {
     this.data = this.searchText;
   }
@@ -26,7 +27,8 @@ export class NewsFilterComponent implements OnInit {
   constructor(private router: Router, private newsApi: NewsService, private newsService: NewsserverService) { }
 
   ngOnInit() {
-    this.newsApi.getNews();
+    this.selectedNewsItem = this.newsApi.selectedNewsType;
+    this.getRelatedNews();
   }
 
   onLoadNews() {
@@ -38,10 +40,19 @@ export class NewsFilterComponent implements OnInit {
   }
 
   onNewsSelection(val) {
+    this.newsApi.selectedNewsType = val;
     if (val === 'Worldwide News') {
       this.newsApi.isLocalNews = false;
     } else if (val === 'Local News') {
       this.newsApi.isLocalNews = true;
+    }
+    this.getRelatedNews();
+  }
+
+  getRelatedNews() {
+    if (this.newsApi.selectedNewsType === 'Worldwide News') {
+      this.newsApi.getNews();
+    } else {
       this.newsApi.getLocalNews();
     }
   }

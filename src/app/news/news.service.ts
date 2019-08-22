@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { News } from './news';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class NewsService {
   isLocalNews = false;
   newsArticles = [];
   newsArticlesSubject = new Subject();
+  selectedNewsType = 'Worldwide News';
   constructor(private http: HttpClient) { }
 
   getNews() {
@@ -27,5 +29,17 @@ export class NewsService {
       this.newsArticles = res;
       this.newsArticlesSubject.next(this.newsArticles);
     });
+  }
+
+  updateNewsItem(newsItem: any) {
+    return this.http.put(this.localNewsUrl + '/' + newsItem._id, newsItem);
+  }
+
+  addNewsItem(newsItem: any) {
+    return this.http.post(this.localNewsUrl, newsItem);
+  }
+
+  deleteNewsItem(newsItem: any) {
+    return this.http.delete(this.localNewsUrl + '/' + newsItem._id);
   }
 }
