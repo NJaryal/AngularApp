@@ -1,24 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, OnChanges } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NewsService } from '../news.service';
+import { Articles } from '../news';
 
 @Component({
   selector: 'app-news-create',
   templateUrl: './news-create.component.html',
-  styleUrls: ['./news-create.component.css']
+  styleUrls: ['./news-create.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NewsCreateComponent implements OnInit {
+export class NewsCreateComponent implements OnInit, OnChanges {
+  @Input() selectedNewsItem:Articles;
   createNewsForm: FormGroup;
   submitted = false;
-  selectedNewsItem: any;
   constructor(private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private newsAPIService: NewsService, private router: Router) { }
 
   ngOnInit() {
-    const index = parseInt(this.route.snapshot.params.index);
-    this.selectedNewsItem = this.newsAPIService.newsArticles['articles'][index];
+    this.loadForm();
+  }
+
+  ngOnChanges() {
+    this.loadForm();
+  }
+
+  private loadForm() {
     this.createNewsForm = this.formBuilder.group({
       title: [this.selectedNewsItem ?
         this.selectedNewsItem.title : '',

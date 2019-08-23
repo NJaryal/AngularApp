@@ -25,4 +25,11 @@
     <a class="btn btn-primary active col-md-2" role="button" (click)="onLoadNews()">Add Article</a
   >
 </form>
-<app-news-list [data]="data"></app-news-list>
+<div class="row">
+  <div class="col-md-6">
+    <app-news-list [data]="data" (selectedNewsItem)="editNewsArticle($event)"></app-news-list>
+  </div>
+  <div class="col-md-6">
+    <app-news-create *ngIf="newsApi.shouldDisplayEdit" [selectedNewsItem]="selectedNewsItemForEdit"></app-news-create>
+  </div>
+</div>

@@ -19,6 +19,8 @@ export class NewsFilterComponent implements OnInit {
   newsSource = ['Worldwide News', 'Local News'];
   localNews: boolean;
   selectedNewsItem: string;
+
+  selectedNewsItemForEdit: any;
   discoverClicked() {
     this.data = this.searchText;
   }
@@ -54,6 +56,10 @@ export class NewsFilterComponent implements OnInit {
     } else {
       this.newsApi.getLocalNews();
     }
+  }
+
+  editNewsArticle(newArticle: Articles) {
+    this.selectedNewsItemForEdit = Object.assign({}, newArticle);
   }
 
 }
