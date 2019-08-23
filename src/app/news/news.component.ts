@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { User } from '../auth/_models';
 import { UserService } from '../auth/_services';
-
 
 @Component({
   selector: 'app-news',
@@ -11,9 +10,15 @@ import { UserService } from '../auth/_services';
 })
 export class NewsComponent implements OnInit {
   currentUser: User;
-    users: User[] = [];
+  users: User[] = [];
+  searchText: any;
+  @Input() searchTerm: string;
+  @Input('data')
+  set data(data: any) {
+    this.searchText = data;
+  }
 
-  constructor(private userService: UserService) { 
+  constructor(private userService: UserService) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 
@@ -22,15 +27,15 @@ export class NewsComponent implements OnInit {
   }
 
   deleteUser(id: number) {
-    this.userService.delete(id).pipe(first()).subscribe(() => { 
-        this.loadAllUsers() 
+    this.userService.delete(id).pipe(first()).subscribe(() => {
+      this.loadAllUsers()
     });
   }
 
   private loadAllUsers() {
-      this.userService.getAll().pipe(first()).subscribe(users => { 
-          this.users = users; 
-      });
+    this.userService.getAll().pipe(first()).subscribe(users => {
+      this.users = users;
+    });
   }
 
 }

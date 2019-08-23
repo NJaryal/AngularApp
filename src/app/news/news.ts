@@ -10,6 +10,7 @@ export interface News {
 }
 
 export interface Articles {
+    _id?: string;
     author: string;
     content: string;
     description: string;

@@ -25,12 +25,15 @@ const routes: Routes = [
   {
     path: 'news/create',
     component: NewsCreateComponent,
-
+  },
+  {
+    path: 'news/edit/:index',
+    component: NewsCreateComponent,
   },
   {
     path: 'not-found',
     component: ErrorPageComponent,
-    data: {message: 'Page not found'}
+    data: { message: 'Page not found' }
   },
   {
     path: '**',
